@@ -18,9 +18,13 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _ProjectList = require('../ProjectList/ProjectList');
+var _Project = require('../Project/Project');
 
-var _ProjectList2 = _interopRequireDefault(_ProjectList);
+var _Project2 = _interopRequireDefault(_Project);
+
+var _Nav = require('../Nav/Nav');
+
+var _Nav2 = _interopRequireDefault(_Nav);
 
 require('./PageHome.styl');
 
@@ -53,14 +57,29 @@ var PageHome = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'PageHome' },
+                _react2.default.createElement(_Nav2.default, null),
                 _react2.default.createElement(
                     'section',
                     { className: 'Intro' },
                     _react2.default.createElement(
                         'h1',
-                        null,
+                        { className: 'Intro__heading' },
                         'Designing things for people to enjoy'
                     )
+                ),
+                _react2.default.createElement(
+                    'section',
+                    { className: 'Featured' },
+                    _react2.default.createElement(
+                        'h1',
+                        { className: 'Featured__heading' },
+                        'Featured projects'
+                    ),
+                    _react2.default.createElement(_Project2.default, {
+                        title: 'Project',
+                        subtitle: 'The power of magic',
+                        thumb: '/assets/projects/project/thumb.png'
+                    })
                 )
             );
         }

@@ -6,10 +6,13 @@ import _ from 'lodash';
 // import Block from '../Block/Block';
 
 // Import block styles
-import './ProjectList.styl';
+import './Project.styl';
 
-export default class ProjectList extends React.Component {
+export default class Project extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
-        return <h1>ProjectList is ready!</h1>;
+        return <div>Project is ready!</div>;
     }
 }

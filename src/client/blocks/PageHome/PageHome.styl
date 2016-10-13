@@ -3,9 +3,35 @@
 @import '../../consts/grid.styl';
 
 .PageHome
-  display: block;
-  max-width: 920px;
-  margin: 0 auto;
+    display: block;
+    margin: 0 auto;
+    user-select: none;
+    cursor: default;
 
-  h1
-      text-align: center;
+    section
+        width: $grid-full;
+        margin: 0 auto;
+
+    .Intro + .Featured
+        margin-top: 50vh;
+
+
+.Intro
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+
+    &__heading
+        width: 14.5ex;
+        text-align: center;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+.Featured
+    &__heading
+        width: 8ex;
+        text-align: center;
+        margin: 0 auto;

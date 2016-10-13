@@ -26400,11 +26400,15 @@
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _ProjectList = __webpack_require__(232);
+	var _Project = __webpack_require__(232);
 
-	var _ProjectList2 = _interopRequireDefault(_ProjectList);
+	var _Project2 = _interopRequireDefault(_Project);
 
-	__webpack_require__(237);
+	var _Nav = __webpack_require__(233);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	__webpack_require__(238);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26435,14 +26439,29 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'PageHome' },
+	                _react2.default.createElement(_Nav2.default, null),
 	                _react2.default.createElement(
 	                    'section',
 	                    { className: 'Intro' },
 	                    _react2.default.createElement(
 	                        'h1',
-	                        null,
+	                        { className: 'Intro__heading' },
 	                        'Designing things for people to enjoy'
 	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'section',
+	                    { className: 'Featured' },
+	                    _react2.default.createElement(
+	                        'h1',
+	                        { className: 'Featured__heading' },
+	                        'Featured projects'
+	                    ),
+	                    _react2.default.createElement(_Project2.default, {
+	                        title: 'Project',
+	                        subtitle: 'The power of magic',
+	                        thumb: '/assets/projects/project/thumb.png'
+	                    })
 	                )
 	            );
 	        }
@@ -36579,7 +36598,7 @@
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	__webpack_require__(233);
+	__webpack_require__(240);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36595,49 +36614,123 @@
 	// Import block styles
 
 
-	var ProjectList = function (_React$Component) {
-	    _inherits(ProjectList, _React$Component);
+	var Project = function (_React$Component) {
+	    _inherits(Project, _React$Component);
 
-	    function ProjectList() {
-	        _classCallCheck(this, ProjectList);
+	    function Project(props) {
+	        _classCallCheck(this, Project);
 
-	        return _possibleConstructorReturn(this, (ProjectList.__proto__ || Object.getPrototypeOf(ProjectList)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Project.__proto__ || Object.getPrototypeOf(Project)).call(this, props));
 	    }
 
-	    _createClass(ProjectList, [{
+	    _createClass(Project, [{
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'h1',
+	                'div',
 	                null,
-	                'ProjectList is ready!'
+	                'Project is ready!'
 	            );
 	        }
 	    }]);
 
-	    return ProjectList;
+	    return Project;
 	}(_react2.default.Component);
 
-	exports.default = ProjectList;
+	exports.default = Project;
 
 /***/ },
 /* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reqwest = __webpack_require__(227);
+
+	var _reqwest2 = _interopRequireDefault(_reqwest);
+
+	var _lodash = __webpack_require__(229);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	__webpack_require__(234);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// Import child blocks
+	// import Block from '../Block/Block';
+
+	// Import block styles
+
+
+	var Nav = function (_React$Component) {
+	    _inherits(Nav, _React$Component);
+
+	    function Nav() {
+	        _classCallCheck(this, Nav);
+
+	        return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+	    }
+
+	    _createClass(Nav, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'Nav' },
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'Nav__item' },
+	                    'work'
+	                ),
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'Nav__item' },
+	                    'about'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Nav;
+	}(_react2.default.Component);
+
+	exports.default = Nav;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(234);
+	var content = __webpack_require__(235);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(236)(content, {"singleton":true});
+	var update = __webpack_require__(237)(content, {"singleton":true});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./ProjectList.styl", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./ProjectList.styl");
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Nav.styl", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Nav.styl");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -36647,21 +36740,21 @@
 	}
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(235)();
+	exports = module.exports = __webpack_require__(236)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".ProjectList {\n  display: block;\n}\n", ""]);
+	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Regular-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Bold-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: 600;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-RegularItalic-Web.woff\");\n  font-family: 'Graphik';\n  font-style: italic;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Light-Web.woff\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: lighter;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Medium-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: 500;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Roman-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: normal;\n}\nbody {\n  font-family: 'Graphik', 'Helvetica Neue', Arial, sans-serif;\n}\nh1 {\n  font-family: 'Austin', 'Times', 'Times New Roman', Georgia, serif;\n  font-size: 150px;\n  font-weight: 400;\n  line-height: 0.9em;\n}\n.Nav {\n  display: block;\n  position: fixed;\n  z-index: 999;\n  right: 68px;\n  top: 100px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  font-size: 21px;\n  line-height: 26px;\n}\n.Nav__item {\n  cursor: pointer;\n  padding: 8px 10px;\n}\n.Nav__item + .Nav__item {\n  margin-left: 20px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36716,7 +36809,7 @@
 	};
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -36968,16 +37061,16 @@
 
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(238);
+	var content = __webpack_require__(239);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(236)(content, {"singleton":true});
+	var update = __webpack_require__(237)(content, {"singleton":true});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -36994,15 +37087,55 @@
 	}
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(235)();
+	exports = module.exports = __webpack_require__(236)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Regular-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Bold-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: 600;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-RegularItalic-Web.woff\");\n  font-family: 'Graphik';\n  font-style: italic;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Light-Web.woff\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: lighter;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Medium-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: 500;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Roman-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: normal;\n}\nbody {\n  font-family: 'Graphik', 'Helvetica Neue', Arial, sans-serif;\n}\nh1 {\n  font-family: 'Austin', 'Times', 'Times New Roman', Georgia, serif;\n  font-size: 150px;\n  font-weight: 400;\n  line-height: 0.9em;\n}\n.PageHome {\n  display: block;\n  max-width: 920px;\n  margin: 0 auto;\n}\n.PageHome h1 {\n  text-align: center;\n}\n", ""]);
+	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Regular-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Bold-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: 600;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-RegularItalic-Web.woff\");\n  font-family: 'Graphik';\n  font-style: italic;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Light-Web.woff\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: lighter;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Medium-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: 500;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Roman-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: normal;\n}\nbody {\n  font-family: 'Graphik', 'Helvetica Neue', Arial, sans-serif;\n}\nh1 {\n  font-family: 'Austin', 'Times', 'Times New Roman', Georgia, serif;\n  font-size: 150px;\n  font-weight: 400;\n  line-height: 0.9em;\n}\n.PageHome {\n  display: block;\n  margin: 0 auto;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default;\n}\n.PageHome section {\n  width: 940px;\n  margin: 0 auto;\n}\n.PageHome .Intro + .Featured {\n  margin-top: 50vh;\n}\n.Intro {\n  height: 100vh;\n  min-height: 700px;\n  position: relative;\n}\n.Intro__heading {\n  width: 14.5ex;\n  text-align: center;\n  margin: 0 auto;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n}\n.Featured__heading {\n  width: 8ex;\n  text-align: center;\n  margin: 0 auto;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(241);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(237)(content, {"singleton":true});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Project.styl", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Project.styl");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(236)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".Project {\n  display: block;\n}\n", ""]);
 
 	// exports
 

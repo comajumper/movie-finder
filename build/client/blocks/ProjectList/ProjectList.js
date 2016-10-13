@@ -18,7 +18,7 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-require('./ProjectList.styl');
+require('./Project.styl');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34,27 +34,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Import block styles
 
 
-var ProjectList = function (_React$Component) {
-    _inherits(ProjectList, _React$Component);
+var Project = function (_React$Component) {
+    _inherits(Project, _React$Component);
 
-    function ProjectList() {
-        _classCallCheck(this, ProjectList);
+    function Project() {
+        _classCallCheck(this, Project);
 
-        return _possibleConstructorReturn(this, (ProjectList.__proto__ || Object.getPrototypeOf(ProjectList)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (Project.__proto__ || Object.getPrototypeOf(Project)).apply(this, arguments));
     }
 
-    _createClass(ProjectList, [{
+    _createClass(Project, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'h1',
+                'div',
                 null,
-                'ProjectList is ready!'
+                'Project is ready!'
             );
         }
     }]);
 
-    return ProjectList;
+    return Project;
 }(_react2.default.Component);
 
-exports.default = ProjectList;
+exports.default = Project;
