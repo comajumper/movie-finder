@@ -26400,15 +26400,7 @@
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _Project = __webpack_require__(232);
-
-	var _Project2 = _interopRequireDefault(_Project);
-
-	var _Nav = __webpack_require__(233);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
-	__webpack_require__(238);
+	__webpack_require__(232);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26419,7 +26411,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	// Import child blocks
-
+	// import Project from '../Project/Project';
+	// import Nav from '../Nav/Nav';
 
 	// Import block styles
 
@@ -26430,38 +26423,66 @@
 	    function PageHome() {
 	        _classCallCheck(this, PageHome);
 
-	        return _possibleConstructorReturn(this, (PageHome.__proto__ || Object.getPrototypeOf(PageHome)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (PageHome.__proto__ || Object.getPrototypeOf(PageHome)).call(this));
+
+	        _this.state = {
+	            movies: []
+	        };
+	        _this.getMovies = _this.getMovies.bind(_this);
+	        return _this;
 	    }
 
 	    _createClass(PageHome, [{
+	        key: 'getMovies',
+	        value: function getMovies() {
+	            var that = this;
+	            (0, _reqwest2.default)({
+	                url: '/api/movies',
+	                method: 'GET',
+	                type: 'json',
+	                success: function success(result) {
+	                    console.log(result);
+	                    that.setState({ movies: result });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.getMovies();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            if (this.state.movies.length < 1) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'Page' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'Loading' },
+	                        'Asking movie theaters...'
+	                    )
+	                );
+	            }
+
+	            var movies = new Array();
+	            for (var i = 0; i < this.state.movies.length; i++) {
+	                var background = { backgroundImage: 'url(' + this.state.movies[i].poster.image + ')' };
+	                movies.push(_react2.default.createElement(
+	                    'div',
+	                    { key: this.state.movies[i].id, className: 'Movie' },
+	                    _react2.default.createElement('div', { className: 'Movie__poster', style: background })
+	                ));
+	            }
+
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'PageHome' },
-	                _react2.default.createElement(_Nav2.default, null),
+	                { className: 'Page' },
 	                _react2.default.createElement(
-	                    'section',
-	                    { className: 'Intro' },
-	                    _react2.default.createElement(
-	                        'h1',
-	                        { className: 'Intro__heading' },
-	                        'Designing things for people to enjoy'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'section',
-	                    { className: 'Featured' },
-	                    _react2.default.createElement(
-	                        'h1',
-	                        { className: 'Featured__heading' },
-	                        'Featured projects'
-	                    ),
-	                    _react2.default.createElement(_Project2.default, {
-	                        title: 'Project',
-	                        subtitle: 'The power of magic',
-	                        thumb: '/assets/projects/project/thumb.png'
-	                    })
+	                    'div',
+	                    { className: 'MovieList' },
+	                    movies
 	                )
 	            );
 	        }
@@ -36578,159 +36599,20 @@
 /* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reqwest = __webpack_require__(227);
-
-	var _reqwest2 = _interopRequireDefault(_reqwest);
-
-	var _lodash = __webpack_require__(229);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	__webpack_require__(240);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// Import child blocks
-	// import Block from '../Block/Block';
-
-	// Import block styles
-
-
-	var Project = function (_React$Component) {
-	    _inherits(Project, _React$Component);
-
-	    function Project(props) {
-	        _classCallCheck(this, Project);
-
-	        return _possibleConstructorReturn(this, (Project.__proto__ || Object.getPrototypeOf(Project)).call(this, props));
-	    }
-
-	    _createClass(Project, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                'Project is ready!'
-	            );
-	        }
-	    }]);
-
-	    return Project;
-	}(_react2.default.Component);
-
-	exports.default = Project;
-
-/***/ },
-/* 233 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reqwest = __webpack_require__(227);
-
-	var _reqwest2 = _interopRequireDefault(_reqwest);
-
-	var _lodash = __webpack_require__(229);
-
-	var _lodash2 = _interopRequireDefault(_lodash);
-
-	__webpack_require__(234);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	// Import child blocks
-	// import Block from '../Block/Block';
-
-	// Import block styles
-
-
-	var Nav = function (_React$Component) {
-	    _inherits(Nav, _React$Component);
-
-	    function Nav() {
-	        _classCallCheck(this, Nav);
-
-	        return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
-	    }
-
-	    _createClass(Nav, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'Nav' },
-	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'Nav__item' },
-	                    'work'
-	                ),
-	                _react2.default.createElement(
-	                    'a',
-	                    { className: 'Nav__item' },
-	                    'about'
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Nav;
-	}(_react2.default.Component);
-
-	exports.default = Nav;
-
-/***/ },
-/* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(235);
+	var content = __webpack_require__(233);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(237)(content, {"singleton":true});
+	var update = __webpack_require__(235)(content, {"singleton":true});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Nav.styl", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Nav.styl");
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./PageHome.styl", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./PageHome.styl");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -36740,21 +36622,21 @@
 	}
 
 /***/ },
-/* 235 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(236)();
+	exports = module.exports = __webpack_require__(234)();
 	// imports
-
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Noto+Sans);", ""]);
 
 	// module
-	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Regular-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Bold-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: 600;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-RegularItalic-Web.woff\");\n  font-family: 'Graphik';\n  font-style: italic;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Light-Web.woff\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: lighter;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Medium-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: 500;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Roman-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: normal;\n}\nbody {\n  font-family: 'Graphik', 'Helvetica Neue', Arial, sans-serif;\n}\nh1 {\n  font-family: 'Austin', 'Times', 'Times New Roman', Georgia, serif;\n  font-size: 150px;\n  font-weight: 400;\n  line-height: 0.9em;\n}\n.Nav {\n  display: block;\n  position: fixed;\n  z-index: 999;\n  right: 68px;\n  top: 100px;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  font-size: 21px;\n  line-height: 26px;\n}\n.Nav__item {\n  cursor: pointer;\n  padding: 8px 10px;\n}\n.Nav__item + .Nav__item {\n  margin-left: 20px;\n}\n", ""]);
+	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\nbody {\n  font-family: 'Noto Sans', Arial, sans-serif;\n  font-size: 14px;\n  line-height: 18px;\n}\nbody {\n  background: #4c0a11;\n}\n.Page {\n  max-width: 90vw;\n  margin: 10vh auto;\n}\n.Loading {\n  color: #fff;\n  margin-top: 50vh;\n  font-size: 32px;\n  line-height: 40px;\n  text-align: center;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n.MovieList {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-animation-name: show;\n          animation-name: show;\n  -webkit-animation-duration: 800ms;\n          animation-duration: 800ms;\n  -webkit-animation-timing-function: ease;\n          animation-timing-function: ease;\n}\n.Movie {\n  -ms-flex-preferred-size: 20%;\n      flex-basis: 20%;\n}\n@media screen and (min-width: 381px) and (max-width: 799px) {\n  .Movie {\n    -ms-flex-preferred-size: 33%;\n        flex-basis: 33%;\n  }\n}\n@media screen and (max-width: 381px) {\n  .Movie {\n    -ms-flex-preferred-size: 50%;\n        flex-basis: 50%;\n  }\n}\n.Movie__title {\n  text-align: center;\n  font-size: 12px;\n  margin-top: 1em;\n  color: rgba(255,255,255,0.4);\n}\n.Movie__poster {\n  background-size: cover;\n  background-position: center;\n}\n.Movie__poster:after {\n  content: \"\";\n  display: block;\n  padding-bottom: 150%;\n}\n@-webkit-keyframes show {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@keyframes show {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 236 */
+/* 234 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36809,7 +36691,7 @@
 	};
 
 /***/ },
-/* 237 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -37058,86 +36940,6 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
-
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(239);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(237)(content, {"singleton":true});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./PageHome.styl", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./PageHome.styl");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(236)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Regular-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-Bold-Web.woff\");\n  font-family: 'Graphik';\n  font-style: normal;\n  font-weight: 600;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Graphik-RegularItalic-Web.woff\");\n  font-family: 'Graphik';\n  font-style: italic;\n  font-weight: normal;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Light-Web.woff\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: lighter;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Medium-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: 500;\n}\n@font-face {\n  src: url(\"/../../assets/fonts/Austin-Roman-Web.woff2\");\n  font-family: 'Austin';\n  font-style: normal;\n  font-weight: normal;\n}\nbody {\n  font-family: 'Graphik', 'Helvetica Neue', Arial, sans-serif;\n}\nh1 {\n  font-family: 'Austin', 'Times', 'Times New Roman', Georgia, serif;\n  font-size: 150px;\n  font-weight: 400;\n  line-height: 0.9em;\n}\n.PageHome {\n  display: block;\n  margin: 0 auto;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  cursor: default;\n}\n.PageHome section {\n  width: 940px;\n  margin: 0 auto;\n}\n.PageHome .Intro + .Featured {\n  margin-top: 50vh;\n}\n.Intro {\n  height: 100vh;\n  min-height: 700px;\n  position: relative;\n}\n.Intro__heading {\n  width: 14.5ex;\n  text-align: center;\n  margin: 0 auto;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n}\n.Featured__heading {\n  width: 8ex;\n  text-align: center;\n  margin: 0 auto;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(241);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(237)(content, {"singleton":true});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Project.styl", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/stylus-loader/index.js!./Project.styl");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(236)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".Project {\n  display: block;\n}\n", ""]);
-
-	// exports
 
 
 /***/ }

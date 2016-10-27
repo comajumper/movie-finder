@@ -18,14 +18,6 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _Project = require('../Project/Project');
-
-var _Project2 = _interopRequireDefault(_Project);
-
-var _Nav = require('../Nav/Nav');
-
-var _Nav2 = _interopRequireDefault(_Nav);
-
 require('./PageHome.styl');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -37,7 +29,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // Import child blocks
-
+// import Project from '../Project/Project';
+// import Nav from '../Nav/Nav';
 
 // Import block styles
 
@@ -48,38 +41,66 @@ var PageHome = function (_React$Component) {
     function PageHome() {
         _classCallCheck(this, PageHome);
 
-        return _possibleConstructorReturn(this, (PageHome.__proto__ || Object.getPrototypeOf(PageHome)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (PageHome.__proto__ || Object.getPrototypeOf(PageHome)).call(this));
+
+        _this.state = {
+            movies: []
+        };
+        _this.getMovies = _this.getMovies.bind(_this);
+        return _this;
     }
 
     _createClass(PageHome, [{
+        key: 'getMovies',
+        value: function getMovies() {
+            var that = this;
+            (0, _reqwest2.default)({
+                url: '/api/movies',
+                method: 'GET',
+                type: 'json',
+                success: function success(result) {
+                    console.log(result);
+                    that.setState({ movies: result });
+                }
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.getMovies();
+        }
+    }, {
         key: 'render',
         value: function render() {
+            if (this.state.movies.length < 1) {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'Page' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'Loading' },
+                        'Asking movie theaters...'
+                    )
+                );
+            }
+
+            var movies = new Array();
+            for (var i = 0; i < this.state.movies.length; i++) {
+                var background = { backgroundImage: 'url(' + this.state.movies[i].poster.image + ')' };
+                movies.push(_react2.default.createElement(
+                    'div',
+                    { key: this.state.movies[i].id, className: 'Movie' },
+                    _react2.default.createElement('div', { className: 'Movie__poster', style: background })
+                ));
+            }
+
             return _react2.default.createElement(
                 'div',
-                { className: 'PageHome' },
-                _react2.default.createElement(_Nav2.default, null),
+                { className: 'Page' },
                 _react2.default.createElement(
-                    'section',
-                    { className: 'Intro' },
-                    _react2.default.createElement(
-                        'h1',
-                        { className: 'Intro__heading' },
-                        'Designing things for people to enjoy'
-                    )
-                ),
-                _react2.default.createElement(
-                    'section',
-                    { className: 'Featured' },
-                    _react2.default.createElement(
-                        'h1',
-                        { className: 'Featured__heading' },
-                        'Featured projects'
-                    ),
-                    _react2.default.createElement(_Project2.default, {
-                        title: 'Project',
-                        subtitle: 'The power of magic',
-                        thumb: '/assets/projects/project/thumb.png'
-                    })
+                    'div',
+                    { className: 'MovieList' },
+                    movies
                 )
             );
         }

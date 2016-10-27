@@ -2,36 +2,58 @@
 @import '../../consts/typography.styl';
 @import '../../consts/grid.styl';
 
-.PageHome
-    display: block;
-    margin: 0 auto;
-    user-select: none;
-    cursor: default;
+body
+    background: rgb(76,10,17);
 
-    section
-        width: $grid-full;
-        margin: 0 auto;
+.Page
+    max-width: 90vw;
+    margin: 10vh auto;
 
-    .Intro + .Featured
-        margin-top: 50vh;
+.Loading
+    color: #FFF;
+    margin-top: 50vh;
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+    transform: translateY(-50%);
+
+.MovieList
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    animation-name: show;
+    animation-duration: 800ms;
+    animation-timing-function: ease;
 
 
-.Intro
-    height: 100vh;
-    min-height: 700px;
-    position: relative;
+@keyframes show {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
 
-    &__heading
-        width: 14.5ex;
+.Movie
+    flex-basis: 20%;
+
+
+    @media screen and (min-width: 381px) and (max-width: 799px)
+        flex-basis: 33%;
+
+    @media screen and (max-width: 381px)
+        flex-basis: 50%;
+
+    &__title
         text-align: center;
-        margin: 0 auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        font-size: 12px;
+        margin-top: 1em;
+        color: rgba(255,255,255,0.4);
 
-.Featured
-    &__heading
-        width: 8ex;
-        text-align: center;
-        margin: 0 auto;
+    &__poster
+        background-size: cover;
+        background-position: center;
+
+        &:after
+            content: "";
+            display: block;
+            padding-bottom: 150%;
