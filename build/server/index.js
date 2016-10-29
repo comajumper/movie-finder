@@ -22,6 +22,10 @@ var _api = require('./routes/api');
 
 var _api2 = _interopRequireDefault(_api);
 
+var _update = require('./routes/update');
+
+var _update2 = _interopRequireDefault(_update);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import reqwest from 'reqwest';
@@ -34,6 +38,7 @@ app.use(_bodyParser2.default.json());
 
 app.use('/assets', _express2.default.static(_path2.default.join(__dirname, '..', '..', 'build', 'assets')));
 app.use('/api', _api2.default);
+app.use('/update', _update2.default);
 
 app.get('/*', function (req, res) {
     return res.sendFile(_path2.default.join(__dirname, '../client/index.html'));

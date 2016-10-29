@@ -27,33 +27,33 @@ body
     animation-duration: 800ms;
     animation-timing-function: ease;
 
+    .Movie
+        flex-basis: 20%;
+
+
+        @media screen and (min-width: 381px) and (max-width: 799px)
+            flex-basis: 33%;
+
+        @media screen and (max-width: 381px)
+            flex-basis: 50%;
+
+        &__title
+            text-align: center;
+            font-size: 12px;
+            margin-top: 1em;
+            color: rgba(255,255,255,0.4);
+
+        &__poster
+            background-size: cover;
+            background-position: center;
+
+            &:after
+                content: "";
+                display: block;
+                padding-bottom: 150%;
+
 
 @keyframes show {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
-
-.Movie
-    flex-basis: 20%;
-
-
-    @media screen and (min-width: 381px) and (max-width: 799px)
-        flex-basis: 33%;
-
-    @media screen and (max-width: 381px)
-        flex-basis: 50%;
-
-    &__title
-        text-align: center;
-        font-size: 12px;
-        margin-top: 1em;
-        color: rgba(255,255,255,0.4);
-
-    &__poster
-        background-size: cover;
-        background-position: center;
-
-        &:after
-            content: "";
-            display: block;
-            padding-bottom: 150%;

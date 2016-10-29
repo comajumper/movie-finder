@@ -29,8 +29,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // Import child blocks
-// import Project from '../Project/Project';
-// import Nav from '../Nav/Nav';
 
 // Import block styles
 
@@ -44,53 +42,65 @@ var PageHome = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (PageHome.__proto__ || Object.getPrototypeOf(PageHome)).call(this));
 
         _this.state = {
-            movies: []
+            data: []
         };
-        _this.getMovies = _this.getMovies.bind(_this);
+        // this.getMovies.bind(this)
         return _this;
     }
 
     _createClass(PageHome, [{
         key: 'getMovies',
         value: function getMovies() {
+            // this.props
+            // let that = this
+            // reqwest({
+            //     url: '/api/movies',
+            //     method: 'GET',
+            //     type: 'json',
+            //     success: function (result) {
+            //         that.setState({ data: result })
+            //     }
+            // });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
             var that = this;
             (0, _reqwest2.default)({
                 url: '/api/movies',
                 method: 'GET',
                 type: 'json',
                 success: function success(result) {
-                    console.log(result);
-                    that.setState({ movies: result });
+                    that.setState({ data: result });
                 }
             });
         }
     }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.getMovies();
-        }
-    }, {
         key: 'render',
         value: function render() {
-            if (this.state.movies.length < 1) {
+            if (this.state.data.length < 1) {
                 return _react2.default.createElement(
                     'div',
                     { className: 'Page' },
                     _react2.default.createElement(
                         'div',
                         { className: 'Loading' },
-                        'Asking movie theaters...'
+                        'Searching movies...'
                     )
                 );
             }
 
             var movies = new Array();
-            for (var i = 0; i < this.state.movies.length; i++) {
-                var background = { backgroundImage: 'url(' + this.state.movies[i].poster.image + ')' };
+            for (var i = 0; i < this.state.data.length; i++) {
+                var background = { backgroundImage: 'url(' + this.state.data[i].movie.poster.image + ')' };
                 movies.push(_react2.default.createElement(
                     'div',
-                    { key: this.state.movies[i].id, className: 'Movie' },
-                    _react2.default.createElement('div', { className: 'Movie__poster', style: background })
+                    { key: this.state.data[i].movie.id, className: 'Movie' },
+                    _react2.default.createElement(
+                        'a',
+                        { href: '/movie/' + this.state.data[i].movie.id },
+                        _react2.default.createElement('div', { className: 'Movie__poster', style: background })
+                    )
                 ));
             }
 

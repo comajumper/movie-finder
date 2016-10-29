@@ -3,8 +3,6 @@ import reqwest from 'reqwest';
 import _ from 'lodash';
 
 // Import child blocks
-// import Project from '../Project/Project';
-// import Nav from '../Nav/Nav';
 
 // Import block styles
 import './PageHome.styl';
@@ -13,40 +11,50 @@ export default class PageHome extends React.Component {
     constructor() {
         super();
         this.state = {
-            movies: []
+            data: []
         }
-        this.getMovies = this.getMovies.bind(this);
+        // this.getMovies.bind(this)
     }
     getMovies() {
+        // this.props
+        // let that = this
+        // reqwest({
+        //     url: '/api/movies',
+        //     method: 'GET',
+        //     type: 'json',
+        //     success: function (result) {
+        //         that.setState({ data: result })
+        //     }
+        // });
+    }
+    componentDidMount() {
         let that = this
         reqwest({
             url: '/api/movies',
             method: 'GET',
             type: 'json',
             success: function (result) {
-                console.log(result);
-                that.setState({ movies: result })
+                that.setState({ data: result })
             }
-        })
-    }
-    componentDidMount() {
-        this.getMovies()
+        });
     }
     render() {
-        if (this.state.movies.length < 1) {
+        if (this.state.data.length < 1) {
             return (
                 <div className="Page">
-                    <div className="Loading">Asking movie theaters...</div>
+                    <div className="Loading">Searching movies...</div>
                 </div>
             );
         }
 
         let movies = new Array();
-        for (let i = 0; i < this.state.movies.length; i++) {
-            let background = { backgroundImage: 'url(' + this.state.movies[i].poster.image + ')' };
+        for (let i = 0; i < this.state.data.length; i++) {
+            let background = { backgroundImage: 'url(' + this.state.data[i].movie.poster.image + ')' };
             movies.push(
-                <div key={this.state.movies[i].id}  className="Movie">
-                    <div className="Movie__poster" style={background} ></div>
+                <div key={this.state.data[i].movie.id}  className="Movie">
+                    <a href={ '/movie/' + this.state.data[i].movie.id}>
+                        <div className="Movie__poster" style={background} ></div>
+                    </a>
                 </div>
             );
         }

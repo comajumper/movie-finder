@@ -4,17 +4,15 @@ import rp from 'request-promise';
 import _ from 'lodash';
 let router = express.Router();
 
-router.get('/movies', function (req, res) {
+router.get('/', function (req, res) {
 
-    console.log('Fetching movies...');
-
-    let today = new Date();
+    let today = new Date(); today = today.toISOString();
 
     let options = {
         uri: 'https://kudago.com/public-api/v1.3/movie-showings/',
         json: true,
         qs: {
-            actual_since: today.toISOString(),
+            actual_since: today,
             page_size: '100',
             order_by: 'movie,place,original_language',
             location: 'msk',
@@ -43,7 +41,7 @@ router.get('/movies', function (req, res) {
 
 });
 
-function getData(options, parseData, data = [], maxpages ) {
+function getData(options, parseData, data = [], maxpages = 2 ) {
     rp(options).then((result) => {
         if (result.next) {
             let page = result.next.match(/page=\d*/g)[0];
