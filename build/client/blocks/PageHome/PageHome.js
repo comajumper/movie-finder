@@ -18,7 +18,7 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-require('./PageHome.styl');
+require('./MovieList.styl');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,42 +29,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // Import child blocks
+// import Movie from '../Movie/Movie';
 
 // Import block styles
 
 
-var PageHome = function (_React$Component) {
-    _inherits(PageHome, _React$Component);
+var MovieList = function (_React$Component) {
+    _inherits(MovieList, _React$Component);
 
-    function PageHome() {
-        _classCallCheck(this, PageHome);
+    function MovieList() {
+        _classCallCheck(this, MovieList);
 
-        var _this = _possibleConstructorReturn(this, (PageHome.__proto__ || Object.getPrototypeOf(PageHome)).call(this));
+        var _this = _possibleConstructorReturn(this, (MovieList.__proto__ || Object.getPrototypeOf(MovieList)).call(this));
 
-        _this.state = {
-            data: []
-        };
-        // this.getMovies.bind(this)
+        _this.state = { data: [] };
+        _this.getMovies = _this.getMovies.bind(_this);
         return _this;
     }
 
-    _createClass(PageHome, [{
+    _createClass(MovieList, [{
         key: 'getMovies',
         value: function getMovies() {
-            // this.props
-            // let that = this
-            // reqwest({
-            //     url: '/api/movies',
-            //     method: 'GET',
-            //     type: 'json',
-            //     success: function (result) {
-            //         that.setState({ data: result })
-            //     }
-            // });
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
             var that = this;
             (0, _reqwest2.default)({
                 url: '/api/movies',
@@ -76,9 +61,16 @@ var PageHome = function (_React$Component) {
             });
         }
     }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.getMovies();
+        }
+    }, {
         key: 'render',
         value: function render() {
-            if (this.state.data.length < 1) {
+            var data = this.state.data;
+
+            if (data.length < 1) {
                 return _react2.default.createElement(
                     'div',
                     { className: 'Page' },
@@ -90,19 +82,14 @@ var PageHome = function (_React$Component) {
                 );
             }
 
-            var movies = new Array();
-            for (var i = 0; i < this.state.data.length; i++) {
-                var background = { backgroundImage: 'url(' + this.state.data[i].movie.poster.image + ')' };
-                movies.push(_react2.default.createElement(
+            var items = new Array();
+            _lodash2.default.forEach(data, function (item, i) {
+                items.push(_react2.default.createElement(
                     'div',
-                    { key: this.state.data[i].movie.id, className: 'Movie' },
-                    _react2.default.createElement(
-                        'a',
-                        { href: '/movie/' + this.state.data[i].movie.id },
-                        _react2.default.createElement('div', { className: 'Movie__poster', style: background })
-                    )
+                    { key: i, className: 'Movie' },
+                    _react2.default.createElement('div', { className: 'Movie__poster', style: { backgroundImage: 'url(' + item.movie.poster.image + ')' } })
                 ));
-            }
+            });
 
             return _react2.default.createElement(
                 'div',
@@ -110,13 +97,13 @@ var PageHome = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'MovieList' },
-                    movies
+                    items
                 )
             );
         }
     }]);
 
-    return PageHome;
+    return MovieList;
 }(_react2.default.Component);
 
-exports.default = PageHome;
+exports.default = MovieList;

@@ -10,13 +10,13 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = require('react-router');
 
-var _PageHome = require('./blocks/PageHome/PageHome');
+var _MovieList = require('./blocks/MovieList/MovieList');
 
-var _PageHome2 = _interopRequireDefault(_PageHome);
+var _MovieList2 = _interopRequireDefault(_MovieList);
 
-var _PageMovie = require('./blocks/PageMovie/PageMovie');
+var _Movie = require('./blocks/Movie/Movie');
 
-var _PageMovie2 = _interopRequireDefault(_PageMovie);
+var _Movie2 = _interopRequireDefault(_Movie);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,8 +24,8 @@ function App(props) {
     return _react2.default.createElement(
         _reactRouter.Router,
         { history: _reactRouter.browserHistory },
-        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _PageHome2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/movie/:id', component: _PageMovie2.default })
+        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _MovieList2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/movie/:id', component: _Movie2.default })
     );
 }
 

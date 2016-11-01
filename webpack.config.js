@@ -31,5 +31,11 @@ module.exports = {
             }
         ]
     },
-    plugins: [env]
+    plugins: [env],
+    externals: {
+        fs: '{}',
+        tls: '{}',
+        net: '{}',
+        console: '{}'
+    }
 };
