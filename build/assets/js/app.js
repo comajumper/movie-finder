@@ -70,8 +70,11 @@
 	    return _react2.default.createElement(
 	        _reactRouter.Router,
 	        { history: _reactRouter.browserHistory },
-	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _MovieList2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/movie/:id', component: _Movie2.default })
+	        _react2.default.createElement(
+	            _reactRouter.Route,
+	            { path: '/', component: _MovieList2.default },
+	            _react2.default.createElement(_reactRouter.Route, { path: '/movie/:id', component: _Movie2.default })
+	        )
 	    );
 	}
 
@@ -26397,6 +26400,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(163);
+
 	var _reqwest = __webpack_require__(227);
 
 	var _reqwest2 = _interopRequireDefault(_reqwest);
@@ -26429,7 +26434,9 @@
 
 	        var _this = _possibleConstructorReturn(this, (MovieList.__proto__ || Object.getPrototypeOf(MovieList)).call(this));
 
-	        _this.state = { data: [] };
+	        _this.state = {
+	            data: []
+	        };
 	        _this.getMovies = _this.getMovies.bind(_this);
 	        return _this;
 	    }
@@ -26448,6 +26455,11 @@
 	            });
 	        }
 	    }, {
+	        key: 'scrollDown',
+	        value: function scrollDown() {
+	            console.log(11);
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.getMovies();
@@ -26455,26 +26467,43 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var data = this.state.data;
+	            var _this2 = this;
 
+	            var data = this.state.data;
 	            if (data.length < 1) {
 	                return _react2.default.createElement(
 	                    'div',
 	                    { className: 'Page' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'Loading' },
+	                        { className: 'MovieList__loading' },
 	                        'Searching movies...'
 	                    )
 	                );
 	            }
 
 	            var items = new Array();
+
 	            _lodash2.default.forEach(data, function (item, i) {
+
+	                var link = '/movie/' + item.movie.id;
+	                var path = _this2.props.location.pathname;
+	                var className = 'MovieList__item';
+
+	                if (path === link) {
+	                    className += ' ' + className + '_selected';
+	                } else if (path !== '/') {
+	                    className += ' ' + className + '_unselected';
+	                }
+
 	                items.push(_react2.default.createElement(
-	                    'div',
-	                    { key: i, className: 'Movie' },
-	                    _react2.default.createElement('div', { className: 'Movie__poster', style: { backgroundImage: 'url(' + item.movie.poster.image + ')' } })
+	                    'li',
+	                    { key: i, className: className },
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: path === link ? '/' : link, onClick: _this2.scrollDown.bind(_this2) },
+	                        _react2.default.createElement('div', { className: 'MovieList__poster', style: { backgroundImage: 'url(' + item.movie.poster.image + ')' } })
+	                    )
 	                ));
 	            });
 
@@ -26482,15 +26511,29 @@
 	                'div',
 	                { className: 'Page' },
 	                _react2.default.createElement(
-	                    'h1',
-	                    { className: 'Page__title' },
-	                    'Movies in theaters'
-	                ),
-	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'MovieList' },
-	                    items
-	                )
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'MovieList__header' },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            { className: 'MovieList__title' },
+	                            'Now playing'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'MovieList__info' },
+	                            data.length + ' movies in Moscow'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'MovieList__items' },
+	                        items
+	                    )
+	                ),
+	                this.props.children
 	            );
 	        }
 	    }]);
@@ -36634,10 +36677,11 @@
 
 	exports = module.exports = __webpack_require__(234)();
 	// imports
-	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=cyrillic);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Abril+Fatface);", ""]);
 
 	// module
-	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\nbody {\n  font-family: 'Montserrat', Arial, sans-serif;\n  font-size: 14px;\n  line-height: 18px;\n}\nbody {\n  background: #6e0c16;\n}\n.Page__title {\n  margin-top: 17vh;\n  max-width: 50vw;\n  padding-left: 10vw;\n  color: #fff;\n  font-size: 7vh;\n  line-height: 1em;\n}\n.Loading {\n  color: #fff;\n  margin-top: 50vh;\n  margin-left: 10vw;\n  font-size: 32px;\n  line-height: 40px;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n.MovieList {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  padding-top: 7vh;\n  padding-bottom: 10vh;\n  overflow-x: scroll;\n  white-space: nowrap;\n  padding-left: 10vw;\n}\n.MovieList::-webkit-scrollbar {\n  display: none;\n}\n.Movie {\n  display: inline-block;\n  width: 35vh;\n  cursor: pointer;\n  position: relative;\n  margin-right: 2vw;\n  -webkit-transition: all 350ms cubic-bezier(0.23, 1, 0.32, 1);\n  transition: all 350ms cubic-bezier(0.23, 1, 0.32, 1);\n  box-shadow: 0 0 10px 0 rgba(0,0,0,0);\n}\n.Movie:last-child {\n  margin-right: 10vw;\n}\n.Movie:before {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  z-index: 12;\n  left: 0;\n  right: 0;\n  content: '';\n  -webkit-transition: box-shadow 350ms cubic-bezier(0.23, 1, 0.32, 1);\n  transition: box-shadow 350ms cubic-bezier(0.23, 1, 0.32, 1);\n  box-shadow: inset 0 20px 0px 0 rgba(255,255,255,0);\n}\n.Movie:hover.Movie:before {\n  box-shadow: inset 0 0 80px 10px rgba(255,255,255,0.05);\n}\n.Movie:hover {\n  z-index: 9999;\n  -webkit-transform: scale(1.07);\n          transform: scale(1.07);\n  box-shadow: 0 20px 50px -5px rgba(0,0,0,0.6);\n}\n.Movie__poster {\n  background-size: cover;\n  z-index: 1;\n  background-position: center;\n}\n.Movie__poster:after {\n  content: \"\";\n  display: block;\n  padding-bottom: 150%;\n}\n", ""]);
+	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\nbody {\n  font-family: 'Roboto', Arial, sans-serif;\n  font-size: 14px;\n  line-height: 18px;\n}\nbody {\n  background: #6e0c16;\n}\n.MovieList {\n  padding-top: 17vh;\n}\n.MovieList__header {\n  text-align: justify;\n  padding: 0 12vw;\n}\n.MovieList__title {\n  font-size: 4.2em;\n  line-height: 1em;\n  margin-bottom: 0.6em;\n  font-weight: 500;\n  color: #fff;\n  vertical-align: baseline;\n  display: inline-block;\n  width: 50%;\n}\n.MovieList__info {\n  vertical-align: baseline;\n  color: rgba(236,138,88,0.74);\n  font-weight: 500;\n  text-transform: uppercase;\n  letter-spacing: 0.168em;\n  width: 50%;\n  text-align: right;\n  display: inline-block;\n}\n.MovieList__items {\n  white-space: nowrap;\n  overflow-x: scroll;\n  overflow-y: visible;\n  padding: 9vh 12vw;\n  padding-top: 3vh;\n}\n.MovieList__items::-webkit-scrollbar {\n  display: none;\n}\n.MovieList__loading {\n  color: #fff;\n  margin-top: 50vh;\n  margin-left: 10vw;\n  font-size: 32px;\n  line-height: 40px;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n.MovieList__item {\n  display: inline-block;\n  width: 35vh;\n  cursor: pointer;\n  position: relative;\n  margin-right: 2vw;\n  -webkit-transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);\n  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);\n  box-shadow: 0 0 10px 0 rgba(0,0,0,0);\n}\n.MovieList__item:last-child {\n  margin-right: 10vw;\n}\n.MovieList__item_unselected {\n  opacity: 0.4;\n  -webkit-transform: scale(0.93);\n          transform: scale(0.93);\n}\n.MovieList__item_selected,\n.MovieList__item:hover {\n  z-index: 9999;\n  -webkit-transform: scale(1.07);\n          transform: scale(1.07);\n  opacity: 1;\n  box-shadow: 0 20px 50px -5px rgba(0,0,0,0.6);\n}\n.MovieList__poster {\n  background-size: cover;\n  z-index: 1;\n  background-position: center;\n}\n.MovieList__poster:after {\n  content: \"\";\n  display: block;\n  padding-bottom: 150%;\n}\n", ""]);
 
 	// exports
 
@@ -36992,16 +37036,56 @@
 	    function Movie() {
 	        _classCallCheck(this, Movie);
 
-	        return _possibleConstructorReturn(this, (Movie.__proto__ || Object.getPrototypeOf(Movie)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Movie.__proto__ || Object.getPrototypeOf(Movie)).call(this));
+
+	        _this.state = { data: [] };
+	        _this.getInfo = _this.getInfo.bind(_this);
+	        return _this;
 	    }
 
 	    _createClass(Movie, [{
+	        key: 'getInfo',
+	        value: function getInfo() {
+	            var that = this;
+	            (0, _reqwest2.default)({
+	                url: '/api/movies',
+	                method: 'GET',
+	                type: 'json',
+	                success: function success(result) {
+	                    result.map(function (item) {
+	                        if (item.movie.id === parseInt(that.props.params.id)) {
+	                            that.setState({ data: item });
+	                        }
+	                    });
+	                }
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+
+	            this.getInfo();
+
+	            if (this.state.data.length < 1) {
+	                return _react2.default.createElement('div', { className: 'Movie' });
+	            }
+
+	            var movie = this.state.data.movie;
+	            var shows = this.state.data.shows;
+
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                'Movie is ready!'
+	                { className: 'Movie' },
+	                _react2.default.createElement(
+	                    'h1',
+	                    { className: 'Movie__title' },
+	                    movie.original_title || movie.title
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'Movie__description' },
+	                    movie.body_text
+	                )
 	            );
 	        }
 	    }]);
@@ -37043,10 +37127,11 @@
 
 	exports = module.exports = __webpack_require__(234)();
 	// imports
-	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Montserrat);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=cyrillic);", ""]);
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Abril+Fatface);", ""]);
 
 	// module
-	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\nbody {\n  font-family: 'Montserrat', Arial, sans-serif;\n  font-size: 14px;\n  line-height: 18px;\n}\n", ""]);
+	exports.push([module.id, "html,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol,\nul {\n  list-style: none;\n}\nblockquote,\nq {\n  quotes: none;\n}\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\nbody {\n  font-family: 'Roboto', Arial, sans-serif;\n  font-size: 14px;\n  line-height: 18px;\n}\n.Movie {\n  padding: 0 12vw;\n  margin-bottom: 17vh;\n  margin-top: 8vh;\n}\n.Movie__title {\n  font-size: 4.2em;\n  line-height: 1.15em;\n  margin-bottom: 0.6em;\n  font-weight: 500;\n  color: #fff;\n  max-width: 10em;\n}\n.Movie__description {\n  max-width: 40em;\n  color: rgba(236,138,88,0.74);\n  font-size: 1.2em;\n  line-height: 1.5em;\n}\n", ""]);
 
 	// exports
 

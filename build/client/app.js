@@ -24,8 +24,11 @@ function App(props) {
     return _react2.default.createElement(
         _reactRouter.Router,
         { history: _reactRouter.browserHistory },
-        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _MovieList2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/movie/:id', component: _Movie2.default })
+        _react2.default.createElement(
+            _reactRouter.Route,
+            { path: '/', component: _MovieList2.default },
+            _react2.default.createElement(_reactRouter.Route, { path: '/movie/:id', component: _Movie2.default })
+        )
     );
 }
 

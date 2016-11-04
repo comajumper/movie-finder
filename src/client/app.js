@@ -7,8 +7,9 @@ import Movie from './blocks/Movie/Movie';
 
 function App(props) {
     return <Router history={browserHistory}>
-        <Route path='/' component={MovieList} />
-        <Route path='/movie/:id' component={Movie} />
+        <Route path='/' component={MovieList}>
+            <Route path='/movie/:id' component={Movie} />
+        </Route>
     </Router>;
 }
 
